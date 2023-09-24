@@ -1,14 +1,13 @@
 package src.entities.Vehicles;
 import src.entities.Containers.*;
 import src.entities.Port.Port;
-import src.interfaces.VehiclesInterface;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-public abstract class Vehicles implements VehiclesInterface{
+public abstract class Vehicles{
     static final String portVehiclesListFileName = "data/PortVehiclesList.txt";
     private String name;
     private String uniqueID;
