@@ -42,7 +42,7 @@ Before running the Port Management System, ensure you have the following prerequ
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/port-management-system.git
+   git clone [https://github.com/yourusername/port-management-system.git](https://github.com/vtq2301/PortManagementSystem.git)
    ```
 
 2. Open the project in your Java IDE or text editor.
