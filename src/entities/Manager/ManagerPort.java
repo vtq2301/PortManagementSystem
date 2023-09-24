@@ -1,4 +1,5 @@
 package src.entities.Manager;
+
 import src.entities.Containers.*;
 import src.entities.Port.Port;
 import src.entities.User.Admin;
@@ -12,39 +13,44 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerPort implements ManagerPortInterfaces{
+// Define a ManagerPort class that implements ManagerPortInterfaces
+public class ManagerPort implements ManagerPortInterfaces {
+    // Define constants for file names
     static final String portVehiclesListFileName = "data/PortVehiclesList.txt";
     private static String vehicleContainersFileName = "data/VehicleContainersList.txt";
+
+    // Implement the start method required by the ManagerPortInterfaces interface
     @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
         int option;
         do {
+            // Display the menu options
             System.out.println("----------  Port Admin Menu ----------");
-            System.out.println("1. Add ports"); //Done
-            System.out.println("2. Remove ports"); //Done
-            System.out.println("3. Assign port manager"); //Done
-            System.out.println("4. Add vehicle to port"); //Done
-            System.out.println("5. Remove vehicle from port"); //Done
-            System.out.println("6. Add container to port"); //Done
-            System.out.println("7. Remove container from port"); //Done
-            System.out.println("8. Calculate port distance"); //Done
-            System.out.println("9. Load container from port to vehicle"); //Done
-            System.out.println("10. Load container from vehicle to port"); //Done
-            System.out.println("11. Return"); //Done
+            System.out.println("1. Add ports"); // Done
+            System.out.println("2. Remove ports"); // Done
+            System.out.println("3. Assign port manager"); // Done
+            System.out.println("4. Add vehicle to port"); // Done
+            System.out.println("5. Remove vehicle from port"); // Done
+            System.out.println("6. Add container to port"); // Done
+            System.out.println("7. Remove container from port"); // Done
+            System.out.println("8. Calculate port distance"); // Done
+            System.out.println("9. Load container from port to vehicle"); // Done
+            System.out.println("10. Load container from vehicle to port"); // Done
+            System.out.println("11. Return"); // Done
             System.out.print("Choose an action (1-11): ");
             option = scanner.nextInt();
+            // Handle user's choice based on the selected option
             if (option == 1) {
                 Port.addPort();
-            }
-            else if (option == 2) {
+            } else if (option == 2) {
                 Scanner scanner1 = new Scanner(System.in);
                 String portToDelete;
                 System.out.println("Enter the portID that you want to delete:");
                 portToDelete = scanner1.nextLine();
                 Port.removePort(portToDelete);
-            }
-            else if (option == 3) {
+            } else if (option == 3) {
+                // Assign a port manager to a port
                 String portID;
                 String userID;
                 String username;
@@ -60,18 +66,16 @@ public class ManagerPort implements ManagerPortInterfaces{
                 password = scanner1.nextLine();
                 PortManager newPortManager = new PortManager(userID, username, password, "Port Manager", Port.getPortById(portID));
                 Admin.assignPortManager(portID, newPortManager);
-            }
-            else if (option == 4) {
+            } else if (option == 4) {
                 Port.addVehicleToPort();
-            }
-            else if (option == 5) {
+            } else if (option == 5) {
                 Scanner scanner1 = new Scanner(System.in);
                 String vehicleToDelete;
                 System.out.println("Vehicles that you want to delete: ");
                 vehicleToDelete = scanner1.nextLine();
                 Port.removeVehicleFromPort(vehicleToDelete);
-            }
-            else if (option == 6) {
+            } else if (option == 6) {
+                // Add a container to a port
                 String portID;
                 String containerID;
                 double containerWeight;
@@ -95,7 +99,7 @@ public class ManagerPort implements ManagerPortInterfaces{
                 if (findPort == null) {
                     System.out.println("Port doesn't exist.");
                 } else {
-                    if (containerType == 1){
+                    if (containerType == 1) {
                         DryStorage newDryStorage = new DryStorage(containerWeight, containerID,
                                 "Dry storage", findPort, 3.5, 4.6);
                         Port.addContainerToPort(portID, newDryStorage);
@@ -119,25 +123,27 @@ public class ManagerPort implements ManagerPortInterfaces{
                         System.out.println("Option not valid");
                     }
                 }
-            }
-            else if (option == 7) {
+            } else if (option == 7) {
+                // Remove a container from the port
                 String containerToDelete;
                 Scanner scanner1 = new Scanner(System.in);
                 System.out.println("Container that you want to delete: ");
                 containerToDelete = scanner1.nextLine();
                 Port.removeContainerFromPort(containerToDelete);
             } else if (option == 8) {
+                // Calculate port distance
                 String port1;
                 String port2;
                 Scanner scanner1 = new Scanner(System.in);
-                System.out.println("Enter IDs of first port");
+                System.out.println("Enter IDs of the first port");
                 port1 = scanner1.nextLine();
-                System.out.println("Enter IDs of second port");
+                System.out.println("Enter IDs of the second port");
                 port2 = scanner1.nextLine();
                 Port startPort = Port.getPortById(port1);
                 Port endPort = Port.getPortById(port2);
                 System.out.println(startPort.calculateDistance(endPort));
             } else if (option == 9) {
+                // Load container from port to vehicle
                 String containerID;
                 String vehicleID;
                 Scanner scanner1 = new Scanner(System.in);
@@ -147,6 +153,7 @@ public class ManagerPort implements ManagerPortInterfaces{
                 vehicleID = scanner1.nextLine();
                 moveContainerFromPortToVehicle(containerID, vehicleID);
             } else if (option == 10) {
+                // Load container from vehicle to port
                 String containerID;
                 String portID;
                 Scanner scanner1 = new Scanner(System.in);
@@ -156,8 +163,10 @@ public class ManagerPort implements ManagerPortInterfaces{
                 portID = scanner1.nextLine();
                 moveContainerFromVehicleToPort(containerID, portID);
             } else if (option == 11) {
+                // Return to the previous menu
                 Admin.start();
             } else {
+                // Handle an invalid input
                 System.out.println("Please input a valid number");
             }
         } while (option!=14);
@@ -165,6 +174,7 @@ public class ManagerPort implements ManagerPortInterfaces{
 
     @Override
     public void moveContainerFromPortToVehicle(String containerUniqueID, String vehicleUniqueID) {
+        // Implement the logic to move a container from port to vehicle
         Containers containerToFind = Containers.getContainerByID(containerUniqueID);
         Vehicles vehiclesToFind = Vehicles.getVehicleByID(vehicleUniqueID); // make a function to find the vehicle and then create a new container with vehicle not port
         if (containerToFind == null){
@@ -215,6 +225,7 @@ public class ManagerPort implements ManagerPortInterfaces{
 
     @Override
     public void writeContainerFromPortToVehicle(String filePath, String vehicleID, String portID, Containers container) {
+        // Implement the logic to write container data from port to vehicle file
         List<Containers> containersList = Containers.readContainerDataFromFile(vehicleContainersFileName);
         List<Vehicles> vehiclesList = Port.readPortVehiclesList(portVehiclesListFileName);
         boolean repeated = false;
@@ -253,6 +264,7 @@ public class ManagerPort implements ManagerPortInterfaces{
 
     @Override
     public void moveContainerFromVehicleToPort(String containerUniqueID, String portUniqueID) {
+        // Implement the logic to move a container from vehicle to port
         Containers containersToFind = Containers.getContainerByIDInVehicle(vehicleContainersFileName, containerUniqueID);
         Port portToFind = Port.getPortById(portUniqueID);
         if (containersToFind == null){
