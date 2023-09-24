@@ -22,6 +22,7 @@ public class ManagerTrip implements ManagerTripInterfaces{
             System.out.println("Please choose (1-3): ");
             option = scanner.nextInt();
             if (option==1){
+                // Option to move a vehicle to another port
                 Scanner scanner1 = new Scanner(System.in);
                 String vehicleID;
                 String portID;
@@ -31,18 +32,22 @@ public class ManagerTrip implements ManagerTripInterfaces{
                 portID = scanner1.nextLine();
                 moveVehicleToPort(vehicleID, portID);
             } else if (option==2) {
+                // Option to update an arrival trip
                 Scanner scanner1 = new Scanner(System.in);
                 String tripID;
                 System.out.println("Enter the trip that needed to be updated: ");
                 tripID = scanner1.nextLine();
                 Trip.updateTrip(tripID);
             } else if (option==3) {
+                // Return to the previous menu
                 Admin.start();
             } else {
+                // Handle an invalid input
                 System.out.println("Please enter a valid number");
             }
-        } while (option!=6);
+        } while (option!=6); // Continue the loop until the user chooses to return
     }
+    
     @Override
     public void moveVehicleToPort(String vehicleID, String portID) {
         Vehicles vehicles = Vehicles.getVehicleByID(vehicleID);
