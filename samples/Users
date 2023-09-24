@@ -1,0 +1,16 @@
+// Admin Users
+User admin1 = new Admin("admin1", "adminuser1", "adminpass1");
+User admin2 = new Admin("admin2", "adminuser2", "adminpass2");
+User admin3 = new Admin("admin3", "adminuser3", "adminpass3");
+User admin4 = new Admin("admin4", "adminuser4", "adminpass4");
+User admin5 = new Admin("admin5", "adminuser5", "adminpass5");
+
+// Port Managers
+User portManager1 = new PortManager("manager1", "manageruser1", "managerpass1");
+User portManager2 = new PortManager("manager2", "manageruser2", "managerpass2");
+User portManager3 = new PortManager("manager3", "manageruser3", "managerpass3");
+User portManager4 = new PortManager("manager4", "manageruser4", "managerpass4");
+User portManager5 = new PortManager("manager5", "manageruser5", "managerpass5");
+
+
+

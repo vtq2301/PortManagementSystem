@@ -1,0 +1,11 @@
+1. Port port1 = new Port("001", "Port 1", 40.7128, -74.0060, 5000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 3000.0);
+2. Port port2 = new Port("002", "Port 2", 34.0522, -118.2437, 8000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 5000.0);
+3. Port port3 = new Port("003", "Port 3", 51.5074, -0.1278, 6000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 4500.0);
+4. Port port4 = new Port("004", "Port 4", 48.8566, 2.3522, 7000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 5500.0);
+5. Port port5 = new Port("005", "Port 5", 35.682839, 139.759455, 9000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 6000.0);
+6. Port port6 = new Port("006", "Port 6", -33.8679, 151.2093, 7000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 5500.0);
+7. Port port7 = new Port("007", "Port 7", 22.3193, 114.1694, 8000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 4500.0);
+8. Port port8 = new Port("008", "Port 8", 40.4168, -3.7038, 6000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 3000.0);
+9. Port port9 = new Port("009", "Port 9", 37.7749, -122.4194, 7000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 4000.0);
+10. Port port10 = new Port("010", "Port 10", -22.9068, -43.1729, 5000, true, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 3500.0);
+

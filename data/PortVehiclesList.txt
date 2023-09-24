@@ -1,0 +1,3 @@
+p124,Sylas,tr123,0.0,50.0,0.0,100.0,class Vehicles.TankerTruck
+null,Galio,sh124,0.0,100.0,0.0,100.0,class Vehicles.Ship
+null,Karthus,tr125,99999999.0,200.0,20.0,100.0,class Vehicles.BasicTruck
