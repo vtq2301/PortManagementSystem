@@ -16,7 +16,8 @@ public class ManagerPortManager implements ManagerPortManagerInterfaces{
             System.out.println("4. Return");
             System.out.println("Please choose (1-3): ");
             option = scanner.nextInt();
-            if (option==1){
+            if (option == 1) {
+                // Option to assign a port manager to a port
                 String portID;
                 String userID;
                 String username;
@@ -32,17 +33,20 @@ public class ManagerPortManager implements ManagerPortManagerInterfaces{
                 password = scanner1.nextLine();
                 PortManager newPortManager = new PortManager(userID, username, password, "Port Manager", Port.getPortById(portID));
                 Admin.assignPortManager(portID, newPortManager);
-            } else if (option==2) {
+            } else if (option == 2) {
+                // Option to remove a port manager
                 String managerID;
                 Scanner scanner1 = new Scanner(System.in);
                 System.out.println("Enter manager Id to delete: ");
                 managerID = scanner1.nextLine();
                 Admin.removeManager(managerID);
-            } else if (option==3) {
+            } else if (option == 3) {
+                // Return to the previous menu
                 Admin.start();
             } else {
+                // Handle an invalid input
                 System.out.println("Please enter a valid number");
             }
-        } while (option!=4);
+        } while (option != 4); // Continue the loop until the user chooses to return
     }
 }

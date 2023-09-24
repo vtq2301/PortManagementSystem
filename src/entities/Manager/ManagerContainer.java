@@ -8,13 +8,18 @@ import src.interfaces.ManagerContainerInterfaces;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerContainer implements ManagerContainerInterfaces{
+// Define a ManagerContainer class that implements ManagerContainerInterfaces
+public class ManagerContainer implements ManagerContainerInterfaces {
+    // Define a constant for the file name
     static final String portContainersListFileName = "data/PortContainersList.txt";
+
+    // Implement the start method required by the ManagerContainerInterfaces interface
     @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
         int option;
         do {
+            // Display the menu options
             System.out.println("1. Add container to port");
             System.out.println("2. Add container to vehicle");
             System.out.println("3. Remove container from port");
@@ -23,40 +28,42 @@ public class ManagerContainer implements ManagerContainerInterfaces{
             System.out.println("6. Return");
             System.out.println("Please choose (1-8): ");
             option = scanner.nextInt();
-            if (option==1){
+
+            // Handle user's choice based on the selected option
+            if (option == 1) {
                 Containers.inputContainerToPort();
-            } else if (option==2) {
+            } else if (option == 2) {
                 Containers.inputContainerToVehicle();
-            } else if (option==3) {
+            } else if (option == 3) {
                 String containerToDelete;
                 Scanner scanner1 = new Scanner(System.in);
                 System.out.println("Container that you want to delete: ");
                 containerToDelete = scanner1.nextLine();
                 Port.removeContainerFromPort(containerToDelete);
-            } else if (option==4) {
+            } else if (option == 4) {
                 String containerToDelete;
                 Scanner scanner1 = new Scanner(System.in);
                 System.out.println("Container that you want to delete: ");
                 containerToDelete = scanner1.nextLine();
                 Vehicles.removeContainerFromVehicle(portContainersListFileName, containerToDelete);
-            } else if (option==5) {
+            } else if (option == 5) {
                 List<Containers> containers = Containers.getAllContainers();
                 String containerID;
                 Scanner scanner1 = new Scanner(System.in);
                 System.out.println("Enter containerID: ");
                 containerID = scanner1.nextLine();
-                for (Containers containers1:containers){
-                    if (containerID.equals(containers1.getUniqueID())){
+                for (Containers containers1 : containers) {
+                    if (containerID.equals(containers1.getUniqueID())) {
                         System.out.println("Fuel for ship per Km: " + containers1.requiredShipFuelConsumption());
-                        System.out.println("Fuel for truck per Km: "+ containers1.requiredTruckFuelConsumption());
+                        System.out.println("Fuel for truck per Km: " + containers1.requiredTruckFuelConsumption());
                     }
-
                 }
-            } else if (option==6) {
+            } else if (option == 6) {
+                // Return to the previous menu, likely the Admin menu
                 Admin.start();
             } else {
                 System.out.println("Please enter a valid number");
             }
-        } while (option!=6);
+        } while (option != 6);
     }
 }
