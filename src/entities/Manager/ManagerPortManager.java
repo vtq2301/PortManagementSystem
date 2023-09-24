@@ -1,7 +1,8 @@
 package src.entities.Manager;
 import src.entities.Port.Port;
 import src.entities.User.*;
-import src.Interfaces.*;
+import src.interfaces.ManagerPortManagerInterfaces;
+
 import java.util.Scanner;
 
 public class ManagerPortManager implements ManagerPortManagerInterfaces{

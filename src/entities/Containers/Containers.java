@@ -2,6 +2,7 @@ package src.entities.Containers;
 
 import src.entities.Port.Port;
 import src.entities.Vehicles.Vehicles;
+import src.interfaces.ContainerInterface;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class Containers {
+public abstract class Containers implements ContainerInterface{
     static final String portFileName = "data/Ports.txt";
     static final String portManagerFileName = "data/PortManager.txt";
     static final String portContainersListFileName = "data/PortContainersList.txt";

@@ -1,10 +1,12 @@
 package src.entities.Manager;
+import src.interfaces.*;
 import src.entities.Containers.Containers;
 import src.entities.Port.*;
 import src.entities.User.Admin;
 import src.entities.User.PortManager;
 import src.entities.Vehicles.Vehicles;
-import src.Interfaces.*;
+import src.interfaces.ManagerViewStatsInterfaces;
+
 import java.util.List;
 import java.util.Scanner;
 public class ManagerViewStats implements ManagerViewStatsInterfaces{

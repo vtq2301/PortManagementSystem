@@ -1,6 +1,4 @@
-package src.Interfaces;
-
-import src.entities.User.PortManager;
+package src.interfaces;
 
 public interface ManagerContainerInterfaces {
     void start();

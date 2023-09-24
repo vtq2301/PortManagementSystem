@@ -1,9 +1,9 @@
 package src.entities.Manager;
-import src.Interfaces.ManagerTripInterfaces;
 import src.entities.Containers.Containers;
 import src.entities.Port.*;
 import src.entities.User.Admin;
 import src.entities.Vehicles.Vehicles;
+import src.interfaces.ManagerTripInterfaces;
 
 import java.util.Date;
 import java.util.List;

@@ -1,10 +1,10 @@
 package src.entities.Manager;
 
-import src.Interfaces.ManagerVehicleForPMInterfaces;
 import src.entities.Port.Port;
 import src.entities.User.Admin;
 import src.entities.User.PortManager;
 import src.entities.Vehicles.Vehicles;
+import src.interfaces.ManagerVehicleForPMInterfaces;
 
 import java.util.ArrayList;
 import java.util.List;

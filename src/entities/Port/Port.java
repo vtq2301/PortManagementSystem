@@ -2,11 +2,12 @@ package src.entities.Port;
 
 import src.entities.Containers.Containers;
 import src.entities.Vehicles.*;
+import src.interfaces.PortInterface;
 
 import java.io.*;
 import java.util.*;
 
-public class Port {
+public class Port implements PortInterface{
     static final String portFileName = "data/Ports.txt";
     static final String portContainersListFileName = "data/PortContainersList.txt";
     static final String portVehiclesListFileName = "data/PortVehiclesList.txt";

@@ -1,12 +1,13 @@
 package src.entities.Vehicles;
 import src.entities.Containers.*;
 import src.entities.Port.Port;
+import src.interfaces.VehiclesInterface;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-public abstract class Vehicles {
+public abstract class Vehicles implements VehiclesInterface{
     static final String portVehiclesListFileName = "data/PortVehiclesList.txt";
     private String name;
     private String uniqueID;
@@ -113,7 +114,7 @@ public abstract class Vehicles {
         this.currentCarryingCapacity = currentCarryingCapacity;
     }
 
-
+    
     public boolean canAddContainers(Containers containers){
         return true;
     }
@@ -139,6 +140,7 @@ public abstract class Vehicles {
             port.addVehicles(this);
         }
     }
+
     public static List<Containers> getContainersInVehicleList(String vehicleID) {
         List<Containers> containersList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("data/VehicleContainersList.txt"))) {
