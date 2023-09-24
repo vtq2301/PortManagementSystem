@@ -49,54 +49,67 @@ public class ManagerTrip implements ManagerTripInterfaces{
     }
     
     @Override
-    public void moveVehicleToPort(String vehicleID, String portID) {
-        Vehicles vehicles = Vehicles.getVehicleByID(vehicleID);
-        System.out.println(portID);
-        double totalFuel = 0;
-        double distance;
-        if (vehicles == null){
-            System.out.println("Vehicle doesn't exist.");
-        }
-        else {
-            distance = vehicles.getCurrentPort().calculateDistance(Port.getPortById(portID));
-            Port portToMove = Port.getPortById(portID);
-            Date date = new Date();
-            if (portToMove == null){
-                System.out.println("The port to move the vehicle doesn't exist.");
-            } else {
-                List<Containers> containersList = Containers.getContainersInVehicleList(vehicleID);
-                for (Containers containers:containersList){
-                    System.out.println(containers.getContainerWeight());
-                    if (vehicles.getVehicleType().equals("Ship")){
-                        totalFuel += containers.getContainerWeight() * containers.getFuelConsumptionShip();
-                    }
-                    else {
-                        totalFuel += containers.getContainerWeight() * containers.getFuelConsumptionTruck();
-                    }
-                }
-                totalFuel = totalFuel*distance;
+public void moveVehicleToPort(String vehicleID, String portID) {
+    // Retrieve the vehicle based on its unique ID
+    Vehicles vehicles = Vehicles.getVehicleByID(vehicleID);
+    System.out.println(portID);
+    double totalFuel = 0;
+    double distance;
+    if (vehicles == null){
+        // If the vehicle doesn't exist, print an error message
+        System.out.println("Vehicle doesn't exist.");
+    }
+    else {
+        // Calculate the distance between the current port and the destination port
+        distance = vehicles.getCurrentPort().calculateDistance(Port.getPortById(portID));
+        Port portToMove = Port.getPortById(portID);
+        Date date = new Date();
+        if (portToMove == null){
+            // If the destination port doesn't exist, print an error message
+            System.out.println("The port to move the vehicle doesn't exist.");
+        } else {
+            // Retrieve a list of containers currently in the vehicle
+            List<Containers> containersList = Containers.getContainersInVehicleList(vehicleID);
+            for (Containers containers:containersList){
+                System.out.println(containers.getContainerWeight());
+                // Calculate the total fuel consumption based on container weight and vehicle type
                 if (vehicles.getVehicleType().equals("Ship")){
-                    if (totalFuel > vehicles.getCurrentFuel()){
-                        System.out.println("Not enough fuel");
-                    }else {
-                        Admin.writeMoveVehicleToPort(portVehiclesListFileName, vehicleID, "null");
-                        Trip trip = new Trip("t001",vehicles, date, null, vehicles.getCurrentPort(), portToMove, null);
-                        Trip.addTrip(trip, vehicles.getCurrentPort(), totalFuel);
-                        System.out.println("Successfully moved");
-                    }
+                    totalFuel += containers.getContainerWeight() * containers.getFuelConsumptionShip();
+                }
+                else {
+                    totalFuel += containers.getContainerWeight() * containers.getFuelConsumptionTruck();
+                }
+            }
+            // Calculate the total fuel required for the journey
+            totalFuel = totalFuel * distance;
+            if (vehicles.getVehicleType().equals("Ship")){
+                if (totalFuel > vehicles.getCurrentFuel()){
+                    // If there's not enough fuel, print an error message
+                    System.out.println("Not enough fuel");
+                }else {
+                    // Move the vehicle to the destination port and create a trip record
+                    Admin.writeMoveVehicleToPort(portVehiclesListFileName, vehicleID, "null");
+                    Trip trip = new Trip("t001",vehicles, date, null, vehicles.getCurrentPort(), portToMove, null);
+                    Trip.addTrip(trip, vehicles.getCurrentPort(), totalFuel);
+                    System.out.println("Successfully moved");
+                }
+            } else {
+                if (totalFuel < vehicles.getCurrentFuel() && portToMove.isLandingAbility()){
+                    // Move the vehicle to the destination port and create a trip record
+                    Admin.writeMoveVehicleToPort(portVehiclesListFileName, vehicleID, "null");
+                    Trip trip = new Trip("t001", vehicles, date, null, vehicles.getCurrentPort(), portToMove, null);
+                    Trip.addTrip(trip, vehicles.getCurrentPort(), totalFuel);
+                    System.out.println("Successfully moved");
+                } else if (!portToMove.isLandingAbility()){
+                    // If the port doesn't support landing, print an error message
+                    System.out.println("Landing not supported");
                 } else {
-                    if (totalFuel < vehicles.getCurrentFuel() && portToMove.isLandingAbility()){
-                        Admin.writeMoveVehicleToPort(portVehiclesListFileName, vehicleID, "null");
-                        Trip trip = new Trip("t001", vehicles, date, null, vehicles.getCurrentPort(), portToMove, null);
-                        Trip.addTrip(trip, vehicles.getCurrentPort(), totalFuel);
-                        System.out.println("Successfully moved");
-                    } else if (!portToMove.isLandingAbility()){
-                        System.out.println("Landing not supported");
-                    } else {
-                        System.out.println("Not enough fuel");
-                    }
+                    // If there's not enough fuel, print an error message
+                    System.out.println("Not enough fuel");
                 }
             }
         }
     }
+}
+
 }
