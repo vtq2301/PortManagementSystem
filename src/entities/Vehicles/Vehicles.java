@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 public abstract class Vehicles implements VehiclesInterface{
     static final String portVehiclesListFileName = "data/PortVehiclesList.txt";
     private String name;
@@ -114,7 +115,7 @@ public abstract class Vehicles implements VehiclesInterface{
         this.currentCarryingCapacity = currentCarryingCapacity;
     }
 
-    
+
     public boolean canAddContainers(Containers containers){
         return true;
     }
@@ -230,36 +231,73 @@ public abstract class Vehicles implements VehiclesInterface{
         return valuesAtIndex2;
     }
 
-    public static void addContainerToVehicle(String filePath, String vehicleID, Containers container) {
-        List<Containers> containersList = Containers.readContainerDataFromFile("VehicleContainersList.txt");
-        Vehicles vehicles = getVehicleByID(vehicleID);
-        boolean repeated = false;
-        for (Containers containers:containersList){
-            if (containers.getUniqueID().equals(container.getUniqueID())){
-                repeated = true;
-            }
-        } if (repeated){
-            System.out.println("Can't add due to duplicated container IDs");
-        } else if (vehicles.overweight(container)) {
-            System.out.println(vehicles.getCurrentCarryingCapacity()+container.getContainerWeight());
-            System.out.println(vehicles.getCarryingCapacity());
-            System.out.println("Vehicle overweight, can't add container.");
+/**
+     * Takes user input to add a container to a specific vehicle.
+     */
+    public static void inputContainerToVehicle() {
+        String vehicleID;
+        String containerID;
+        double containerWeight;
+        int containerType;
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter the vehicle: ");
+        vehicleID = scanner.nextLine();
+        
+        System.out.println("Enter container ID: ");
+        containerID = scanner.nextLine();
+        
+        System.out.println("Enter container weight: ");
+        containerWeight = scanner.nextDouble();
+        
+        System.out.println("----------  Container Type ----------");
+        System.out.println("1. Dry Storage");
+        System.out.println("2. Open Top");
+        System.out.println("3. Open Side");
+        System.out.println("4. Refrigerated");
+        System.out.println("5. Liquid");
+        System.out.print("Please choose from 1-5: ");
+        
+        containerType = scanner.nextInt();
+        
+        Vehicles vehicle = Vehicles.getVehicleByID(vehicleID);
+        
+        if (vehicle == null) {
+            System.out.println("Vehicle doesn't exist.");
         } else {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                writer.write(vehicleID + ",");
-                writer.write(container.getUniqueID() + ",");
-                writer.write(container.getContainerType() + ",");
-                writer.write(container.getContainerWeight() + ",");
-                writer.write(container.getFuelConsumptionShip() + ",");
-                writer.write(container.getFuelConsumptionTruck()+"");
-                writer.newLine();
-                updateVehicleWeight(vehicleID, vehicles.getCurrentCarryingCapacity()+container.getContainerWeight());
-                System.out.println("Container data has been appended to the file.");
-            } catch (IOException e) {
-                e.printStackTrace();
+            switch (containerType) {
+                case 1:
+                    DryStorage newDryStorage = new DryStorage(containerWeight, containerID,
+                            "Dry storage", vehicle, 3.5, 4.6);
+                    Vehicles.addContainerToVehicle(vehicleContainersFileName, vehicleID, newDryStorage);
+                    break;
+                case 2:
+                    OpenTop newOpenTop = new OpenTop(containerWeight, containerID,
+                            "Open top", vehicle, 2.8, 3.2);
+                    Vehicles.addContainerToVehicle(vehicleContainersFileName, vehicleID, newOpenTop);
+                    break;
+                case 3:
+                    OpenSide newOpenSide = new OpenSide(containerWeight, containerID,
+                            "Open side", vehicle, 2.7, 3.2);
+                    Vehicles.addContainerToVehicle(vehicleContainersFileName, vehicleID, newOpenSide);
+                    break;
+                case 4:
+                    Refrigerated newRefrigerated = new Refrigerated(containerWeight, containerID,
+                            "Refrigerated", vehicle, 4.5, 5.4);
+                    Vehicles.addContainerToVehicle(vehicleContainersFileName, vehicleID, newRefrigerated);
+                    break;
+                case 5:
+                    Liquid newLiquid = new Liquid(containerWeight, containerID,
+                            "Liquid", vehicle, 4.8, 5.3);
+                    Vehicles.addContainerToVehicle(vehicleContainersFileName, vehicleID, newLiquid);
+                    break;
+                default:
+                    System.out.println("Option not valid");
             }
         }
     }
+
     public static void updateVehicleWeight(String vehicleIDToUpdate, double newValue) {
         List<String> updatedLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(portVehiclesListFileName))) {
