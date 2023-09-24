@@ -1,3 +1,10 @@
+package src.entities.Port;
+
+import src.entities.Containers.Containers;
+import src.entities.Vehicles.*;
+
+import java.io.*;
+import java.util.*;
 /**
  * The Port class represents a port with its attributes and functionality.
  * It implements the PortInterface.
@@ -195,7 +202,12 @@ public class Port implements PortInterface {
             return (dist);
         }
     }
-
+    /**
+     * Checks if adding a container to the port will exceed its storing capacity.
+     *
+     * @param containers The container to be added.
+     * @return True if adding the container will exceed capacity, false otherwise.
+     */
     public boolean isOverWeight(Containers containers){
         if (this.currentCapacity + containers.getContainerWeight() < this.storingCapacity){
             System.out.println(this.currentCapacity + containers.getContainerWeight());
@@ -204,6 +216,11 @@ public class Port implements PortInterface {
         }
         return true;
     }
+    /**
+     * Retrieves a list of all ports from the data file.
+     *
+     * @return A list of Port objects containing information about all ports.
+     */
     public static List<Port> getAllPorts(){
         List<Port> portList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(portFileName))) {
