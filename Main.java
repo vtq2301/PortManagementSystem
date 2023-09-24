@@ -67,7 +67,7 @@ public class Main {
                 username = scanner1.nextLine();
                 System.out.println("Password: ");
                 password = scanner1.nextLine();
-                Admin admin = new Admin("Ad001","TranVy", "vyvy0301", "Admin");
+                Admin admin = new Admin("Ad001","AdminTest", "RMIT@2023", "Admin");
                 if (admin.getUsername().equals(username) && admin.getPassword().equals(password)){
                     Admin.start();
                 } else {
