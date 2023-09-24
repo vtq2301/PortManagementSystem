@@ -9,7 +9,7 @@ import java.util.*;
  * The Port class represents a port with its attributes and functionality.
  * It implements the PortInterface.
  */
-public class Port implements PortInterface {
+public class Port{
     // File paths for data storage
     static final String portFileName = "data/Ports.txt";
     static final String portContainersListFileName = "data/PortContainersList.txt";
