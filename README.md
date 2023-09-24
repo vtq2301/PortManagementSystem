@@ -93,18 +93,19 @@ The application's menu structure is organized as follows:
 The system provides sample data for testing purposes. You can use this data to simulate port operations and test the application's functionality.
 
 Test cases used for demo video:
-Admin:
-Admin username: AdminTest
-Admin password: RMIT@2023
-Port:
-PortID: 128
-PortName: HEllo
-Port latitude: 90.0
-Port Longitude: 90.0
-Port storing capacity: 200000
-Port current capacity: 20.0
-Landing ability: true
-More sample are given in our sample folder.
+
+- Admin:
+  - Admin username: AdminTest
+  - Admin password: RMIT@2023
+- Port:
+  - PortID: 128
+  - PortName: HEllo
+  - Port latitude: 90.0
+  - Port Longitude: 90.0
+  - Port storing capacity: 200000
+  - Port current capacity: 20.0
+  - Landing ability: true
+  - More sample are given in our sample folder.
 ## Documentation
 
 For detailed documentation and code comments, refer to the source code files in the project.
