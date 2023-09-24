@@ -16,6 +16,8 @@
 
 The Port Management System is a Java-based command-line application that allows users to manage and simulate various aspects of a port, including containers, vehicles, ports, and trips. The system is designed to provide port administrators and managers with tools to efficiently manage their resources and make decisions related to port operations.
 
+Youtube link: https://youtu.be/pMvAq7POoNA
+
 ## Features
 
 The Port Management System offers the following key features:
@@ -42,7 +44,7 @@ Before running the Port Management System, ensure you have the following prerequ
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone [https://github.com/yourusername/port-management-system.git](https://github.com/vtq2301/PortManagementSystem.git)
+   git clone https://github.com/vtq2301/PortManagementSystem.git
    ```
 
 2. Open the project in your Java IDE or text editor.
