@@ -1,16 +1,14 @@
-package src.entities.Port;
-
-import src.entities.Containers.Containers;
-import src.entities.Vehicles.*;
-import src.interfaces.PortInterface;
-
-import java.io.*;
-import java.util.*;
-
-public class Port implements PortInterface{
+/**
+ * The Port class represents a port with its attributes and functionality.
+ * It implements the PortInterface.
+ */
+public class Port implements PortInterface {
+    // File paths for data storage
     static final String portFileName = "data/Ports.txt";
     static final String portContainersListFileName = "data/PortContainersList.txt";
     static final String portVehiclesListFileName = "data/PortVehiclesList.txt";
+
+    // Attributes of the Port class
     private String uniqueID;
     private String name;
     private double latitude;
@@ -22,8 +20,24 @@ public class Port implements PortInterface{
     private List<Vehicles> vehicleList;
     private List<Trip> tripList;
 
-    public Port(String uniqueID, String name, double latitude, double longitude, int storingCapacity, boolean landingAbility, List<Containers> containerList, List<Vehicles> vehicleList, List<Trip> tripList, double currentCapacity) {
-        this.uniqueID = "p"+ uniqueID;
+    /**
+     * Constructor to initialize a Port object.
+     *
+     * @param uniqueID         Unique identifier for the port.
+     * @param name             Name of the port.
+     * @param latitude         Latitude coordinates of the port.
+     * @param longitude        Longitude coordinates of the port.
+     * @param storingCapacity  Maximum capacity of containers that can be stored at the port.
+     * @param landingAbility   Indicates whether the port has landing ability.
+     * @param containerList    List of containers currently at the port.
+     * @param vehicleList      List of vehicles currently at the port.
+     * @param tripList         List of trips associated with the port.
+     * @param currentCapacity  Current capacity of containers at the port.
+     */
+    public Port(String uniqueID, String name, double latitude, double longitude,
+                int storingCapacity, boolean landingAbility, List<Containers> containerList,
+                List<Vehicles> vehicleList, List<Trip> tripList, double currentCapacity) {
+        this.uniqueID = "p" + uniqueID;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
