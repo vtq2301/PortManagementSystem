@@ -105,7 +105,7 @@ Test cases used for demo video:
   - Port storing capacity: 200000
   - Port current capacity: 20.0
   - Landing ability: true
-  - More sample are given in our sample folder.
+More sample are given in our sample folder.
 ## Documentation
 
 For detailed documentation and code comments, refer to the source code files in the project.
