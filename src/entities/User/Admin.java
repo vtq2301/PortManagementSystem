@@ -11,18 +11,22 @@ import java.util.Scanner;
 
 public class Admin extends User {
     static final String portManagerFileName = "data/PortManager.txt";
-    public Admin(String userID, String username, String password, String role){
+
+    // Constructor for the Admin class
+    public Admin(String userID, String username, String password, String role) {
         super(userID, username, password, "Admin");
     }
 
-    public static void assignPortManager(String portID,PortManager portManager){
+    // Assign a Port Manager to a port
+    public static void assignPortManager(String portID, PortManager portManager) {
         Port currentPort = Port.getPortById(portID);
-        if (currentPort == null){
-            System.out.println("Port doesn't exist");
+        if (currentPort == null) {
+            System.out.println("Port doesn't exist.");
         } else if (!PortManager.checkForPortIDInPortManager(currentPort)) {
             System.out.println("Port already has a manager.");
         } else {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(portManagerFileName, true))) {
+                // Write Port Manager data to the file
                 writer.write(portID + ",");
                 writer.write(portManager.getUserID() + ",");
                 writer.write(portManager.getUsername() + ",");
@@ -35,7 +39,9 @@ public class Admin extends User {
             }
         }
     }
-    public static void removeManager(String managerIdToDelete){
+
+    // Remove a Port Manager
+    public static void removeManager(String managerIdToDelete) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(portManagerFileName))) {
             String line;
@@ -63,6 +69,8 @@ public class Admin extends User {
         }
         System.out.println("Port Manager with ID " + managerIdToDelete + " has been deleted.");
     }
+
+    // Write a vehicle's move to a new port
     public static void writeMoveVehicleToPort(String portFile, String vehicleID, String newPortID) {
         List<String> portLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(portFile))) {
@@ -87,6 +95,8 @@ public class Admin extends User {
         }
         System.out.println("Vehicle with ID " + vehicleID + " has been transferred to port " + newPortID);
     }
+
+    // Get a list of all Port Managers
     public static List<PortManager> getAllPortManager() {
         List<PortManager> portManagers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(portManagerFileName))) {
@@ -109,6 +119,7 @@ public class Admin extends User {
         return portManagers;
     }
 
+    // Start the Admin menu
     public static void start() {
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -127,8 +138,7 @@ public class Admin extends User {
             if (option == 1) {
                 ManagerPort managerPort = new ManagerPort();
                 managerPort.start();
-            }
-            else if (option == 2) {
+            } else if (option == 2) {
                 ManagerVehicle managerVehicles = new ManagerVehicle();
                 managerVehicles.start();
             } else if (option == 3) {
@@ -140,17 +150,20 @@ public class Admin extends User {
             } else if (option == 5) {
                 ManagerTrip managerTrip = new ManagerTrip();
                 managerTrip.start();
-            } else if (option==6) {
+            } else if (option == 6) {
                 ManagerViewStats managerViewStats = new ManagerViewStats();
                 managerViewStats.start();
             } else if (option == 7) {
-                String givenDay = "Mon Sep 18 00:00:00 ICT 2023";
+                String givenDay;
+                Scanner scanner1 = new Scanner(System.in);
+                System.out.println("Enter the date(eg. Mon Sep 18 00:00:00 ICT 2023): ");
+                givenDay = scanner1.nextLine();
                 System.out.println(Trip.calculateTotalFuelConsumption(givenDay));
             } else if (option == 8) {
-
+                // Logout
             } else {
-                System.out.println("Invalid input! You should enter 1 or 2!");
+                System.out.println("Invalid input! You should enter a number between 1 and 8.");
             }
-        } while (option != 7);
+        } while (option != 8);
     }
 }
